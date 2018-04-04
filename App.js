@@ -4,28 +4,27 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Platform,
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from 'react-native'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
   android: 'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
-});
+})
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
+const renderAppView =
+  () => {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Welcome to React Native Demo App!
         </Text>
         <Text style={styles.instructions}>
           To get started, edit App.js
@@ -34,7 +33,12 @@ export default class App extends Component<Props> {
           {instructions}
         </Text>
       </View>
-    );
+    )
+  }
+
+export default class App extends Component<{}> {
+  render() {
+    return renderAppView()
   }
 }
 
@@ -55,4 +59,4 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-});
+})
