@@ -102,6 +102,7 @@ const ManagedView = createReactClass({
 Others:
 
 - [(BREAKING) View API changes from "Hyperapp 2.0", hopefully closer to standard functional component API (brodybits/hyperapp-api-demo-on-inferno-and-ultradom#5)](https://github.com/brodybits/hyperapp-api-demo-on-inferno-and-ultradom/issues/5)
+- Pass event data to action functions
 - [Make this even more functional (#7)](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues/7) ref: <https://www.bignerdranch.com/blog/destroy-all-classes-turn-react-components-inside-out-with-functional-programming/>
 - [support browser (#1)](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues/1)
 - Publish generic (common) functionality in one or more npm packages
