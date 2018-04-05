@@ -19,12 +19,16 @@ import {
   View
 } from 'react-native'
 
-const initState = {count: 0}
-
-const actions = {
-    up: (state) => ({ count: state.count + 1 }),
-    dn: (state) => ({ count: state.count - 1 }),
-}
+const App = () => (
+  <ManagedView
+    state={{count: 0}}
+    actions={{
+      up: (state) => ({ count: state.count + 1 }),
+      dn: (state) => ({ count: state.count - 1 }),
+    }}>
+    <MyView />
+  </ManagedView>
+)
 
 const MyView =
   ({state, actions}) => {
@@ -47,12 +51,6 @@ const MyView =
       </View>
     )
   }
-
-const App = () => (
-  <ManagedView state={initState} actions={actions}>
-    <MyView />
-  </ManagedView>
-)
 
 export default App
 

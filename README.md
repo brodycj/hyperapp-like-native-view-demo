@@ -33,20 +33,20 @@ iOS: `react-native run-ios` or open `ios/hyperappMiniRewriteDemoOnReactNative.xc
 
 ## Quick tour
 
-Initial state and actions (inspired by Hyperapp demo app in <https://github.com/hyperapp/hyperapp#getting-started>):
-
-```js
-const initState = {count: 0}
-
-const actions = {
-    up: (state) => ({ count: state.count + 1 }),
-    dn: (state) => ({ count: state.count - 1 }),
-}
-```
-
-Application view component in JSX:
+React Native App with initial state, actions, and view in JSX (partially inspired by Hyperapp demo app in <https://github.com/hyperapp/hyperapp#getting-started>):
 
 ```jsx
+const App = () => (
+  <ManagedView
+    state={{count: 0}}
+    actions={{
+      up: (state) => ({ count: state.count + 1 }),
+      dn: (state) => ({ count: state.count - 1 }),
+    }}>
+    <MyView />
+  </ManagedView>
+)
+
 const MyView =
   ({state, actions}) => {
     return (
@@ -68,16 +68,6 @@ const MyView =
       </View>
     )
   }
-```
-
-React Native `App` component:
-
-```jsx
-const App = () => (
-  <ManagedView state={initState} actions={actions}>
-    <MyView />
-  </ManagedView>
-)
 
 export default App
 ```
