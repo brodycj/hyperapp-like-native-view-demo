@@ -15,6 +15,7 @@ MOTIVATION:
 - <https://github.com/hyperapp/hyperapp/issues/168> - desire to use Hyperapp API on React Native
 - <https://medium.com/hyperapp/hyperapp-for-redux-refugees-2507c9dd1ddc>
 - <https://github.com/hyperapp/hyperapp/issues/641> (desire to use Ultradom as a dependency), especially rejected idea in <https://github.com/hyperapp/hyperapp/issues/641#issuecomment-376445893> (remove VDOM from Hyperapp)
+- <https://github.com/hyperapp/hyperapp/issues/672> - Hyperapp 2.0 API under discussion, desire to experiment on React Native as well
 
 See also: <https://github.com/brodybits/hyperapp-api-demo-on-inferno-and-ultradom> - prototypic rewrite of Hyperapp state/action management working with functional (stateless) components on multiple VDOM APIs: Inferno (React API) and Ultradom
 
@@ -91,12 +92,17 @@ export default class App extends Component<{}> {
 
 **MAJOR:**
 
-- [Dealing with "effects" (side effects) such as I/O & delay timers (brodybits/hyperapp-api-demo-on-inferno-and-ultradom#4)](https://github.com/brodybits/hyperapp-api-demo-on-inferno-and-ultradom/issues/4)
+- [Side effects such as I/O & delay timers (#3)](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues/3)
 
 Others:
 
 - [(BREAKING) View API changes from "Hyperapp 2.0", hopefully closer to standard functional component API (brodybits/hyperapp-api-demo-on-inferno-and-ultradom#5)](https://github.com/brodybits/hyperapp-api-demo-on-inferno-and-ultradom/issues/5)
+- More generic
+- [Use functional components (#7)](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues/7)
+- [support browser (#1)](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues/1)
+- Publish generic (common) functionality in one or more npm packages
 - [CC0 (public domain) API specification (brodybits/hyperapp-api-demo-on-inferno-and-ultradom#1)](https://github.com/brodybits/hyperapp-api-demo-on-inferno-and-ultradom/issues/1)
 - demo on <https://github.com/dabbott/react-native-web-player>
 - TodoMVC app, likely based on <https://github.com/dangvanthanh/hyperapp-todomvc>
 - better styling
+- [other open issues](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues)
