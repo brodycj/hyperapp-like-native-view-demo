@@ -22,26 +22,26 @@ import {
 const initState = {count: 0}
 
 const actions = {
-    increase: (value) => (state) => ({ count: state.count + value }),
-    decrease: (value) => (state) => ({ count: state.count - value }),
+    up: (state) => ({ count: state.count + 1 }),
+    dn: (state) => ({ count: state.count - 1 }),
 }
 
-const renderAppView =
-  (state, actions) => {
+const MyView =
+  ({state, actions}) => {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Hyperapp micro rewrite demo on React Native
         </Text>
         <Button
-          onPress={() => actions.increase(1)}
+          onPress={actions.up}
           title="Up (+1)"
         />
         <Text style={styles.welcome}>
           {state.count}
         </Text>
         <Button
-          onPress={() => actions.decrease(1)}
+          onPress={actions.dn}
           title="Down (-1)"
         />
       </View>
@@ -49,7 +49,9 @@ const renderAppView =
   }
 
 const App = () => (
-  <ManagedView state={initState} actions={actions} renderView={renderAppView} />
+  <ManagedView state={initState} actions={actions}>
+    <MyView />
+  </ManagedView>
 )
 
 export default App
@@ -58,13 +60,15 @@ const ManagedView = createReactClass({
   getInitialState() {
     const ac = {}
     const self = this
-    for (let a in this.props.actions) ac[a] = (v) => {
-      self.setState(prev => ({ac: ac, st: (this.props.actions[a](v)(prev.st))}))
+    for (let a in this.props.actions) ac[a] = () => {
+      self.setState(prev => ({ac: ac, st: (this.props.actions[a](prev.st))}))
     }
     return {ac: ac, st: this.props.state}
   },
   render() {
-    return this.props.renderView(this.state.st, this.state.ac)
+    return React.Children.map(this.props.children, ch => (
+      React.cloneElement(ch, {state: this.state.st, actions: this.state.ac})
+    ))
   }
 })
 
