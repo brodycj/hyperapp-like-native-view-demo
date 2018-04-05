@@ -10,7 +10,7 @@ LICENSE: ISC OR MIT
 
 ## About
 
-Simple counter app on React Native with mini rewrite of Hyperapp state/action management, inspired by Hyperapp demo in <https://github.com/hyperapp/hyperapp#getting-started>
+Simple counter app demo on React Native with mini rewrite of Hyperapp state/action management, with support for side effects, inspired by Hyperapp demo in <https://github.com/hyperapp/hyperapp#getting-started>.
 
 MOTIVATION:
 
@@ -33,7 +33,7 @@ iOS: `react-native run-ios` or open `ios/hyperappMiniRewriteDemoOnReactNative.xc
 
 ## Quick tour
 
-React Native App with initial state, actions, and view in JSX (partially inspired by Hyperapp demo app in <https://github.com/hyperapp/hyperapp#getting-started>):
+React Native App with initial state, actions, effects (side effects such as I/O, timers, I/O, other asynchronous operations, and other non-pure functions), and view in JSX (partially inspired by Hyperapp demo app in <https://github.com/hyperapp/hyperapp#getting-started>):
 
 ```jsx
 const App = () => (
@@ -42,13 +42,22 @@ const App = () => (
     actions={{
       up: (state) => ({ count: state.count + 1 }),
       dn: (state) => ({ count: state.count - 1 }),
+    }}
+    effects = {{
+      delayedUpAndDn: (actions, effects) => {
+        setTimeout(effects.upAndDn, 500)
+      },
+      upAndDn: (actions, effects) => {
+        actions.up()
+        setTimeout(actions.dn, 500)
+      }
     }}>
     <MyView />
   </ManagedView>
 )
 
 const MyView =
-  ({state, actions}) => {
+  ({state, actions, effects}) => {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -65,6 +74,13 @@ const MyView =
           onPress={actions.dn}
           title="Down (-1)"
         />
+        <Text>
+          ...
+        </Text>
+        <Button
+          onPress={effects.delayedUpAndDn}
+          title="Up and down with delay"
+        />
       </View>
     )
   }
@@ -78,15 +94,19 @@ Generic `ManagedView` component that supports the Hyperapp action/state/view API
 const ManagedView = createReactClass({
   getInitialState() {
     const ac = {}
+    const ef = {}
     const self = this
     for (let a in this.props.actions) ac[a] = () => {
       self.setState(prev => ({ac: ac, st: (this.props.actions[a](prev.st))}))
     }
-    return {ac: ac, st: this.props.state}
+    for (let e in this.props.effects) ef[e] = () => {
+      this.props.effects[e](ac, ef)
+    }
+    return {ac: ac, st: this.props.state, ef: ef}
   },
   render() {
     return React.Children.map(this.props.children, ch => (
-      React.cloneElement(ch, {state: this.state.st, actions: this.state.ac})
+      React.cloneElement(ch, {state: this.state.st, actions: this.state.ac, effects: this.state.ef})
     ))
   }
 })
@@ -95,14 +115,10 @@ const ManagedView = createReactClass({
 
 ## TODO
 
-**MAJOR:**
-
-- [Side effects such as I/O & delay timers (#3)](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues/3)
-
 Others:
 
 - [(BREAKING) View API changes from "Hyperapp 2.0", hopefully closer to standard functional component API (brodybits/hyperapp-api-demo-on-inferno-and-ultradom#5)](https://github.com/brodybits/hyperapp-api-demo-on-inferno-and-ultradom/issues/5)
-- Pass event data to action functions
+- Pass event data to action and effect functions
 - [Make this even more functional (#7)](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues/7) ref: <https://www.bignerdranch.com/blog/destroy-all-classes-turn-react-components-inside-out-with-functional-programming/>
 - [support browser (#1)](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues/1)
 - Publish generic (common) functionality in one or more npm packages

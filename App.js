@@ -25,13 +25,22 @@ const App = () => (
     actions={{
       up: (state) => ({ count: state.count + 1 }),
       dn: (state) => ({ count: state.count - 1 }),
+    }}
+    effects = {{
+      delayedUpAndDn: (actions, effects) => {
+        setTimeout(effects.upAndDn, 500)
+      },
+      upAndDn: (actions, effects) => {
+        actions.up()
+        setTimeout(actions.dn, 500)
+      }
     }}>
     <MyView />
   </ManagedView>
 )
 
 const MyView =
-  ({state, actions}) => {
+  ({state, actions, effects}) => {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -48,6 +57,13 @@ const MyView =
           onPress={actions.dn}
           title="Down (-1)"
         />
+        <Text>
+          ...
+        </Text>
+        <Button
+          onPress={effects.delayedUpAndDn}
+          title="Up and down with delay"
+        />
       </View>
     )
   }
@@ -57,15 +73,19 @@ export default App
 const ManagedView = createReactClass({
   getInitialState() {
     const ac = {}
+    const ef = {}
     const self = this
     for (let a in this.props.actions) ac[a] = () => {
       self.setState(prev => ({ac: ac, st: (this.props.actions[a](prev.st))}))
     }
-    return {ac: ac, st: this.props.state}
+    for (let e in this.props.effects) ef[e] = () => {
+      this.props.effects[e](ac, ef)
+    }
+    return {ac: ac, st: this.props.state, ef: ef}
   },
   render() {
     return React.Children.map(this.props.children, ch => (
-      React.cloneElement(ch, {state: this.state.st, actions: this.state.ac})
+      React.cloneElement(ch, {state: this.state.st, actions: this.state.ac, effects: this.state.ef})
     ))
   }
 })
