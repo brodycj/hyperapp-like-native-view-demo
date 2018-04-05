@@ -66,25 +66,32 @@ const renderAppView =
   }
 ```
 
-App component with support for Hyperapp action/state/view API:
+React Native `App` component:
+
+```jsx
+const App = () => (
+  <ManagedView state={initState} actions={actions} renderView={renderAppView} />
+)
+
+export default App
+```
+
+`ManagedView` component that supports the Hyperapp action/state/view API:
 
 ```js
-export default class App extends Component<{}> {
-  constructor(props) {
-    super(props)
-
-    this.state = initState
-
+const ManagedView = createReactClass({
+  getInitialState() {
+    const ac = {}
     const self = this
-    this.actions = {}
-    for (let a in actions) this.actions[a] = (v) => {
-      self.setState(prevState => (actions[a](v)(prevState)))
+    for (let a in this.props.actions) ac[a] = (v) => {
+      self.setState(prev => ({ac: ac, st: (this.props.actions[a](v)(prev.st))}))
     }
-  }
+    return {ac: ac, st: this.props.state}
+  },
   render() {
-    return renderAppView(this.state, this.actions)
+    return this.props.renderView(this.state.st, this.state.ac)
   }
-}
+})
 ```
 
 
@@ -97,8 +104,7 @@ export default class App extends Component<{}> {
 Others:
 
 - [(BREAKING) View API changes from "Hyperapp 2.0", hopefully closer to standard functional component API (brodybits/hyperapp-api-demo-on-inferno-and-ultradom#5)](https://github.com/brodybits/hyperapp-api-demo-on-inferno-and-ultradom/issues/5)
-- More generic
-- [Use functional components (#7)](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues/7)
+- [Make this even more functional (#7)](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues/7) ref: <https://www.bignerdranch.com/blog/destroy-all-classes-turn-react-components-inside-out-with-functional-programming/>
 - [support browser (#1)](https://github.com/brodybits/hyperapp-micro-rewrite-demo-on-react-native/issues/1)
 - Publish generic (common) functionality in one or more npm packages
 - [CC0 (public domain) API specification (brodybits/hyperapp-api-demo-on-inferno-and-ultradom#1)](https://github.com/brodybits/hyperapp-api-demo-on-inferno-and-ultradom/issues/1)

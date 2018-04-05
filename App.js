@@ -8,7 +8,9 @@
  * @flow
  */
 
-import React, { Component } from 'react'
+import React from 'react'
+
+import createReactClass from 'create-react-class'
 
 import {
   Button,
@@ -46,22 +48,25 @@ const renderAppView =
     )
   }
 
-export default class App extends Component<{}> {
-  constructor(props) {
-    super(props)
+const App = () => (
+  <ManagedView state={initState} actions={actions} renderView={renderAppView} />
+)
 
-    this.state = initState
+export default App
 
+const ManagedView = createReactClass({
+  getInitialState() {
+    const ac = {}
     const self = this
-    this.actions = {}
-    for (let a in actions) this.actions[a] = (v) => {
-      self.setState(prevState => (actions[a](v)(prevState)))
+    for (let a in this.props.actions) ac[a] = (v) => {
+      self.setState(prev => ({ac: ac, st: (this.props.actions[a](v)(prev.st))}))
     }
-  }
+    return {ac: ac, st: this.props.state}
+  },
   render() {
-    return renderAppView(this.state, this.actions)
+    return this.props.renderView(this.state.st, this.state.ac)
   }
-}
+})
 
 // from react-native init:
 const styles = StyleSheet.create({
