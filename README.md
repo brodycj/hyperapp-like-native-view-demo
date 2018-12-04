@@ -31,6 +31,12 @@ Android: `react-native run-android`
 
 iOS: `react-native run-ios` or open `ios/hyperappMiniRewriteDemoOnReactNative.xcodeproj` and run from Xcode
 
+## Run on codesandbox.io
+
+Paste the contents of [App.js](./App.js) into `App.js` in <https://codesandbox.io/s/q4qymyp2l6>
+
+(see <https://github.com/necolas/react-native-web#quick-start>)
+
 ## Quick tour
 
 React Native App with initial state, actions, effects (side effects such as I/O, timers, I/O, other asynchronous operations, and other non-pure functions), and view in JSX (partially inspired by Hyperapp demo app in <https://github.com/hyperapp/hyperapp#getting-started>):
@@ -114,6 +120,10 @@ const ManagedView = createReactClass({
 
 
 ## TODO
+
+Near-term:
+
+- Use `react-native-web` to support build and run on browser
 
 Others:
 
