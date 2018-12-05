@@ -21,7 +21,7 @@ import {
 } from 'react-native'
 
 const App = () => (
-  <ManagedView
+  <ManagedAppView
     state={{count: 0}}
     actions={{
       up: (state) => ({ count: state.count + 1 }),
@@ -36,42 +36,39 @@ const App = () => (
         setTimeout(actions.dn, 500)
       }
     }}>
-    <MyView />
-  </ManagedView>
+    <MyAppView />
+  </ManagedAppView>
 )
 
-const MyView =
-  ({state, actions, effects}) => {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Hyperapp micro rewrite demo on React Native
-        </Text>
-        <Button
-          onPress={actions.up}
-          title="Up (+1)"
-        />
-        <Text style={styles.welcome}>
-          {state.count}
-        </Text>
-        <Button
-          onPress={actions.dn}
-          title="Down (-1)"
-        />
-        <Text>
-          ...
-        </Text>
-        <Button
-          onPress={effects.delayedUpAndDn}
-          title="Up and down with delay"
-        />
-      </View>
-    )
-  }
+const MyAppView = ({state, actions, effects}) => (
+  <View style={styles.container}>
+    <Text style={styles.welcome}>
+      Hyperapp micro rewrite demo on React Native
+    </Text>
+    <Button
+      onPress={actions.up}
+      title="Up (+1)"
+    />
+    <Text style={styles.welcome}>
+      {state.count}
+    </Text>
+    <Button
+      onPress={actions.dn}
+      title="Down (-1)"
+    />
+    <Text>
+      ...
+    </Text>
+    <Button
+      onPress={effects.delayedUpAndDn}
+      title="Up and down with delay"
+    />
+  </View>
+)
 
 export default App
 
-const ManagedView = createReactClass({
+const ManagedAppView = createReactClass({
   getInitialState() {
     const ac = {}
     const ef = {}
