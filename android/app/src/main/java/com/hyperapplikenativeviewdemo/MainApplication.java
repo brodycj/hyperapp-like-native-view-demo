@@ -1,4 +1,4 @@
-package com.hyperappminirewritedemoonreactnative;
+package com.hyperapplikenativeviewdemo;
 
 import android.app.Application;
 
