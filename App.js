@@ -14,9 +14,9 @@ import React from 'react'
 import createReactClass from 'create-react-class'
 
 import {
-  Button,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View
 } from 'react-native'
 
@@ -45,26 +45,39 @@ const MyAppView = ({state, actions, effects}) => (
     <Text style={styles.welcome}>
       Hyperapp micro rewrite demo on React Native
     </Text>
-    <Button
+    <MyTouchButton
+      style={styles.mybutton}
       onPress={actions.up}
       title="Up (+1)"
     />
     <Text style={styles.welcome}>
       {state.count}
     </Text>
-    <Button
+    <MyTouchButton
+      style={styles.mybutton}
       onPress={actions.dn}
       title="Down (-1)"
     />
     <Text>
       ...
     </Text>
-    <Button
+    <MyTouchButton
+      style={styles.mybutton}
       onPress={effects.delayedUpAndDn}
       title="Up and down with delay"
     />
   </View>
 )
+
+const MyTouchButton = (props) => {
+  const { title, ...other } = props
+
+  return (
+    <TouchableHighlight {...other}>
+      <Text>{title}</Text>
+    </TouchableHighlight>
+  )
+}
 
 export default App
 
@@ -95,6 +108,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  mybutton: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10
   },
   welcome: {
     fontSize: 20,
