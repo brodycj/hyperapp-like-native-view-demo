@@ -27,7 +27,7 @@ First step: `npm install`
 
 Android: `react-native run-android`
 
-iOS: `react-native run-ios` or open `ios/hyperappMiniRewriteDemoOnReactNative.xcodeproj` and run from Xcode
+iOS: `react-native run-ios` or open `ios/HyperappLikeNativeViewDemo.xcodeproj` and run from Xcode
 
 ## Run on codesandbox.io
 
