@@ -116,19 +116,22 @@ const ManagedAppView = createReactClass({
 
 ## TODO
 
-Near-term:
+### Urgent
 
-- Use `react-native-web` to support build and run on browser
+- Press-button visual behavior needs improvement on Android and iOS mobile platforms
 
-Others:
+### Near-term
 
-- [(BREAKING) View API changes from "Hyperapp 2.0", hopefully closer to standard functional component API (brodybits/hyperapp-api-demo-on-inferno-and-ultradom#5)](https://github.com/brodybits/hyperapp-api-demo-on-inferno-and-ultradom/issues/5)
+- Integrate build and run on browser using [`react-native-web`](https://github.com/necolas/react-native-web) ([#1](https://github.com/brodybits/hyperapp-like-native-view-demo/issues/1))
+
+### Future
+
+- [(BREAKING) View API changes from "Hyperapp 2.0", hopefully closer to standard functional component API (brodybits/hyperapp-rewrite-demo-on-inferno-and-superfine#5)](https://github.com/brodybits/hyperapp-rewrite-demo-on-inferno-and-superfine/issues/5)
 - Pass event data to action and effect functions
 - [Make this even more functional (#7)](https://github.com/brodybits/hyperapp-like-native-view-demo/issues/7) ref: <https://www.bignerdranch.com/blog/destroy-all-classes-turn-react-components-inside-out-with-functional-programming/>
-- [support browser (#1)](https://github.com/brodybits/hyperapp-like-native-view-demo/issues/1)
 - Publish generic (common) functionality in one or more npm packages
-- [CC0 (public domain) API specification (brodybits/hyperapp-api-demo-on-inferno-and-ultradom#1)](https://github.com/brodybits/hyperapp-api-demo-on-inferno-and-ultradom/issues/1)
+- improve styling
+- [CC0 (public domain) API specification (brodybits/hyperapp-rewrite-demo-on-inferno-and-superfine#1)](https://github.com/brodybits/hyperapp-rewrite-demo-on-inferno-and-superfine/issues/1)
 - demo on <https://github.com/dabbott/react-native-web-player>
 - TodoMVC app, likely based on <https://github.com/dangvanthanh/hyperapp-todomvc>
-- better styling
 - [other open issues](https://github.com/brodybits/hyperapp-like-native-view-demo/issues)
