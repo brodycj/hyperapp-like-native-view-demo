@@ -8,7 +8,7 @@ LICENSE: ISC OR MIT
 
 ## About
 
-Simple counter app demo with state/action management system based on [Hyperapp](https://github.com/jorgebucaran/hyperapp) API, working on React Native and [`react-native-web`](https://github.com/necolas/react-native-web#readme). Inspired by Hyperapp demo in <https://github.com/hyperapp/hyperapp#getting-started>.
+Simple counter app demo with state/action management system based on [Hyperapp](https://github.com/jorgebucaran/hyperapp) API, using elements supported by [`react-primitives`](https://github.com/lelandrichardson/react-primitives#readme), working on React Native and [`react-native-web`](https://www.npmjs.com/package/react-native-web). Inspired by Hyperapp demo in <https://github.com/hyperapp/hyperapp#getting-started>.
 
 MOTIVATION:
 
@@ -37,11 +37,15 @@ Paste the contents of [`App.js`](./App.js) into `App.js` in <https://codesandbox
 
 (see [`react-native-web#quick-start`](https://github.com/necolas/react-native-web#quick-start))
 
+### Using react-primitives
+
+see below
+
 ## Quick tour
 
 ### Top-level
 
-React Native App with initial state, actions, effects (side effects such as I/O, timers, I/O, other asynchronous operations, and other non-pure functions), and view in JSX (partially inspired by Hyperapp demo app in <https://github.com/hyperapp/hyperapp#getting-started>):
+Top-level app functions with initial state, actions, effects (side effects such as I/O, timers, I/O, other asynchronous operations, and other non-pure functions), and view in JSX (partially inspired by Hyperapp demo app in <https://github.com/hyperapp/hyperapp#getting-started>):
 
 ```jsx
 const App = () => (
@@ -124,16 +128,18 @@ const ManagedAppView = createReactClass({
 
 ### MyTouchButton component
 
-Functional `MyTouchButton` component using `TouchableHighlight` for easier portability to [`react-primitives`](https://github.com/lelandrichardson/react-primitives#readme):
+Functional `MyTouchButton` component using `TouchableWithoutFeedback` imported as Touchable for portability to [`react-primitives`](https://github.com/lelandrichardson/react-primitives#readme):
 
 ```js
 const MyTouchButton = (props) => {
-  const { title, ...other } = props
+  const { onPress, title, ...other } = props
 
   return (
-    <TouchableHighlight {...other}>
-      <Text>{title}</Text>
-    </TouchableHighlight>
+    <View {...other}>
+      <Touchable onPress={onPress}>
+        <Text>{title}</Text>
+      </Touchable>
+    </View>
   )
 }
 ```
@@ -163,15 +169,47 @@ const styles = StyleSheet.create({
 })
 ```
 
+## Use with react-primitives
+
+### App.js changes for react-primitives
+
+```diff
+--- a/App.js
++++ b/App.js
+@@ -19,9 +19,9 @@ import createReactClass from 'create-react-class'
+ import {
+   StyleSheet,
+   Text,
+-  TouchableWithoutFeedback as Touchable,
++  Touchable,
+   View
+-} from 'react-native'
++} from 'react-primitives'
+ 
+ const App = () => (
+   <ManagedAppView
+```
+
+### react-primitives on codesandbox.io
+
+* Add [`react-primitives`](https://www.npmjs.com/package/react-primitives) on codesandbox.io or use a fork like <https://codesandbox.io/s/xvzmvylo8o>
+* Apply the changes above to [App.js](./App.js) when pasting into codesandbox.io:
+
+### react-primitives on mobile app
+
+* `npm install react-primitives`
+* Apply the changes above to [App.js](./App.js)
+
 ## TODO
 
 ### Urgent
 
-- Press-button visual behavior needs improvement on Android and iOS mobile platforms
+TBD
 
 ### Near-term
 
 - Integrate build and run on browser using [`react-native-web`](https://github.com/necolas/react-native-web) ([#1](https://github.com/brodybits/hyperapp-like-native-view-demo/issues/1))
+- Nice touch button onPress animation
 
 ### Future
 

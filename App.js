@@ -13,10 +13,13 @@ import React from 'react'
 
 import createReactClass from 'create-react-class'
 
+/**
+ * Elements supported by react-primitives
+ */
 import {
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableWithoutFeedback as Touchable,
   View
 } from 'react-native'
 
@@ -70,12 +73,14 @@ const MyAppView = ({state, actions, effects}) => (
 )
 
 const MyTouchButton = (props) => {
-  const { title, ...other } = props
+  const { onPress, title, ...other } = props
 
   return (
-    <TouchableHighlight {...other}>
-      <Text>{title}</Text>
-    </TouchableHighlight>
+    <View {...other}>
+      <Touchable onPress={onPress}>
+        <Text>{title}</Text>
+      </Touchable>
+    </View>
   )
 }
 
