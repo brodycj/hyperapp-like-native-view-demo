@@ -3,14 +3,5 @@ extends:
   - "standard-react"
 
 rules:
-  # general:
-  "semi": ["error", "always"]
-
-  # App.js & index.js:
-  "object-curly-spacing": ["error", "never"]
-
-  # App.js:
-  "space-before-function-paren": "off"
-
   # App.js & *.config.js:
   "comma-dangle": "off"
