@@ -3,5 +3,9 @@ extends:
   - "standard-react"
 
 rules:
+  # JSX (App.js general):
+  "jsx-quotes": ["error", "prefer-double"]
+  # App.js:
+  "react/prop-types": "off"
   # App.js & *.config.js:
   "comma-dangle": "off"
