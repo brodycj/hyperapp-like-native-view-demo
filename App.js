@@ -23,12 +23,12 @@ import {
 
 const App = () => (
   <ManagedAppView
-    state={{count: 0}}
+    state={{ count: 0 }}
     actions={{
       up: (state) => ({ count: state.count + 1 }),
       dn: (state) => ({ count: state.count - 1 }),
     }}
-    effects = {{
+    effects={{
       delayedUpAndDn: (actions, effects) => {
         setTimeout(effects.upAndDn, 500)
       },
@@ -41,7 +41,7 @@ const App = () => (
   </ManagedAppView>
 )
 
-const MyAppView = ({state, actions, effects}) => (
+const MyAppView = ({ state, actions, effects }) => (
   <View style={styles.container}>
     <Text style={styles.welcome}>
       Hyperapp micro rewrite demo on React Native
@@ -85,21 +85,25 @@ const MyTouchButton = (props) => {
 export default App
 
 const ManagedAppView = createReactClass({
-  getInitialState() {
+  getInitialState () {
     const ac = {}
     const ef = {}
     const self = this
-    for (let a in this.props.actions) ac[a] = () => {
-      self.setState(prev => ({ac: ac, st: (this.props.actions[a](prev.st))}))
+    for (let a in this.props.actions) {
+      ac[a] = () => {
+        self.setState(prev => ({ ac: ac, st: (this.props.actions[a](prev.st)) }))
+      }
     }
-    for (let e in this.props.effects) ef[e] = () => {
-      this.props.effects[e](ac, ef)
+    for (let e in this.props.effects) {
+      ef[e] = () => {
+        this.props.effects[e](ac, ef)
+      }
     }
-    return {ac: ac, st: this.props.state, ef: ef}
+    return { ac: ac, st: this.props.state, ef: ef }
   },
-  render() {
+  render () {
     return React.Children.map(this.props.children, ch => (
-      React.cloneElement(ch, {state: this.state.st, actions: this.state.ac, effects: this.state.ef})
+      React.cloneElement(ch, { state: this.state.st, actions: this.state.ac, effects: this.state.ef })
     ))
   }
 })
