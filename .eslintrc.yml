@@ -1,0 +1,7 @@
+extends:
+  - "standard"
+  - "standard-react"
+
+rules:
+  # App.js & *.config.js:
+  "comma-dangle": "off"
