@@ -29,13 +29,22 @@ const App = () => (
       dn: (state) => ({ count: state.count - 1 }),
     }}
     effects={{
-      delayedUpAndDn: (actions, effects) => {
-        setTimeout(effects.upAndDn, 500)
-      },
-      upAndDn: (actions, effects) => {
+      up3: (actions, effects) => {
         actions.up()
-        setTimeout(actions.dn, 500)
-      }
+        setTimeout(effects.up2, 400)
+      },
+      up2: (actions, effects) => {
+        actions.up()
+        setTimeout(actions.up, 400)
+      },
+      dn3: (actions, effects) => {
+        actions.dn()
+        setTimeout(effects.dn2, 400)
+      },
+      dn2: (actions, effects) => {
+        actions.dn()
+        setTimeout(actions.dn, 400)
+      },
     }}>
     <MyAppView />
   </ManagedAppView>
@@ -46,6 +55,13 @@ const MyAppView = ({ state, actions, effects }) => (
     <Text style={styles.welcome}>
       Hyperapp micro rewrite demo on React Native
     </Text>
+    <Text>···</Text>
+    <MyTouchButton
+      style={styles.mybutton}
+      onPress={effects.up3}
+      title="Up 3"
+    />
+    <Text>···</Text>
     <MyTouchButton
       style={styles.mybutton}
       onPress={actions.up}
@@ -59,13 +75,11 @@ const MyAppView = ({ state, actions, effects }) => (
       onPress={actions.dn}
       title="Down (-1)"
     />
-    <Text>
-      ...
-    </Text>
+    <Text>···</Text>
     <MyTouchButton
       style={styles.mybutton}
-      onPress={effects.delayedUpAndDn}
-      title="Up and down with delay"
+      onPress={effects.dn3}
+      title="Down 3"
     />
   </View>
 )
