@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
 ```diff
 --- a/App.js
 +++ b/App.js
-@@ -19,9 +19,9 @@ import createReactClass from 'create-react-class'
+@@ -17,9 +17,9 @@ import createReactClass from 'create-react-class'
  import {
    StyleSheet,
    Text,
@@ -197,8 +197,8 @@ const styles = StyleSheet.create({
 
 ### react-primitives on codesandbox.io
 
-* Add [`react-primitives`](https://www.npmjs.com/package/react-primitives) on codesandbox.io or use a fork like <https://codesandbox.io/s/xvzmvylo8o>
-* Apply the changes above to [App.js](./App.js) when pasting into codesandbox.io:
+* Add [`react-primitives`](https://www.npmjs.com/package/react-primitives) on codesandbox.io or use a fork such as <https://codesandbox.io/s/xvzmvylo8o>
+* Apply the changes above to [App.js](./App.js) before pasting into codesandbox.io
 
 ### react-primitives on mobile app
 
